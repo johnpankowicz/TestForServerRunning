@@ -1,23 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Service1 } from './services/service1'
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: './app.component-stub.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponentStub {
   title = 'testasync';
+
   start: number;
-  myservice: Service1;
-
-  constructor(_myservice: Service1 ){
-    this.myservice = _myservice;
-  }
-
-  ngOnInit() {
-    this.myservice.printTime(0);
-  }
 
   testit() {
     this.start = this.getNow();
@@ -38,7 +29,6 @@ export class AppComponent implements OnInit {
 
   getTimeDiff() {
     return this.getNow() - this.start;
-    // return this.getNow();
   }
 
   waitForOneSecond() {
