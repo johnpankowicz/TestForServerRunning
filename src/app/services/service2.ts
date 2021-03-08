@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 @Injectable()
 export class Service2 {
-  printTime(start: number) {
-    let time = this.getNow() - start
+  printTime() {
+    let time = this.getNow()
     console.log("Service 2: ", time);
   }
 
-  getNow() {
+ getNow() {
     let now = Date.now();
-    return Math.floor(now / 100); // return tenths of second
+    let sec = (Math.floor(now / 1000)) % 100;
+    let ms = now % 1000;
+    return sec.toString() + ":" + ms.toString();
   }
-}
+  }

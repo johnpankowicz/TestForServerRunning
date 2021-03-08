@@ -7,47 +7,43 @@ import { Service2 } from './services/service2';
 
 let start: number;
 
-function testit() {
-  start = getNow();
-  console.log("start test: ", getTimeDiff());
+function isProviderService1() {
+  console.log("start isProviderService1: ", getNow());
 
   // promiseMethod();
   // console.log("after return from promiseMethod: ", getTimeDiff());
 
   let prom = asyncMethod();
-  console.log("after return from asyncMethod: ", getTimeDiff());
+  console.log("after return from asyncMethod: ", getNow());
 
   return false;
 }
 
 function getNow() {
   let now = Date.now();
-  return Math.floor(now / 100); // return tenths of second
-}
-
-function getTimeDiff() {
-  return getNow();
-  // return getNow() - start;
+  let sec = (Math.floor(now / 1000)) % 100;
+  let ms = now % 1000;
+  return sec.toString() + ":" + ms.toString();
 }
 
 function waitForOneSecond() {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve("ResolveValue");
-      console.log("inside setTimeout callback: ", getTimeDiff());
+      console.log("inside setTimeout callback: ", getNow());
     }, 1000);
   });
 }
 
 function promiseMethod() {
   waitForOneSecond().then((value) =>
-  console.log("Inside promiseMethod callback:", value, getTimeDiff()));
-  console.log("Inside promiseMethod:", getTimeDiff());
+  console.log("Inside promiseMethod callback:", value, getNow()));
+  console.log("Inside promiseMethod:", getNow());
 }
 
 async function asyncMethod() {
   const value = await waitForOneSecond();
-  console.log("Inside asyncMethod:", value, getTimeDiff());
+  console.log("Inside asyncMethod:", value, getNow());
   }
 
 function useService1() {
@@ -64,7 +60,7 @@ function useService1() {
   providers: [
     {
     provide: Service1,
-    useClass: testit() ?  Service1 : Service2
+    useClass: isProviderService1() ?  Service1 : Service2
     // useClass: useService1() ?  Service1 : Service2
     }
 ],

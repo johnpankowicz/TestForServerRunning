@@ -16,49 +16,45 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myservice.printTime(0);
+    this.myservice.printTime();
   }
 
   testit() {
-    this.start = this.getNow();
-    console.log("start test: ", this.getTimeDiff());
+    console.log("start test: ", this.getNow());
 
     // this.promiseMethod();
-    // console.log("after return from promiseMethod: ", this.getTimeDiff());
+    // console.log("after return from promiseMethod: ", this.getNow());
 
     let prom = this.asyncMethod();
-    console.log("after return from asyncMethod: ", this.getTimeDiff());
+    console.log("after return from asyncMethod: ", this.getNow());
     prom.then
   }
 
   getNow() {
     let now = Date.now();
-    return Math.floor(now / 100); // return tenths of second
-  }
-
-  getTimeDiff() {
-    return this.getNow() - this.start;
-    // return this.getNow();
+    let sec = (Math.floor(now / 1000)) % 100;
+    let ms = now % 1000;
+    return sec.toString() + ":" + ms.toString();
   }
 
   waitForOneSecond() {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve("ResolveValue");
-        console.log("inside setTimeout callback: ", this.getTimeDiff());
+        console.log("inside setTimeout callback: ", this.getNow());
       }, 1000);
     });
   }
 
   promiseMethod(){
     this.waitForOneSecond().then((value) =>
-    console.log("Inside promiseMethod callback:", value, this.getTimeDiff()));
-    console.log("Inside promiseMethod:", this.getTimeDiff());
+    console.log("Inside promiseMethod callback:", value, this.getNow()));
+    console.log("Inside promiseMethod:", this.getNow());
   }
 
   async asyncMethod() {
     const value = await this.waitForOneSecond();
-    console.log("Inside asyncMethod:", value, this.getTimeDiff());
+    console.log("Inside asyncMethod:", value, this.getNow());
     }
 
 
