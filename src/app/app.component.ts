@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Service1 } from './services/service1'
+import { Component } from '@angular/core';
+// import { MyService } from './services/myservice'
+
+
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'testasync';
   start: number;
-  myservice: Service1;
 
-  constructor(_myservice: Service1 ){
-    this.myservice = _myservice;
+  constructor (){
   }
 
-  ngOnInit() {
-    this.myservice.printTime();
-  }
+  // ngOnInit() {
+  //   console.log("AppComponent:ngOnInit", this.getNow())
+  //   this.myservice.printTime();
+  // }
 
   testit() {
     console.log("start test: ", this.getNow());

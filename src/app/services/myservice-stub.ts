@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 @Injectable()
-export class Service1 {
+export class MyServiceStub {
   printTime() {
-    let time = this.getNow();
-    console.log("Service 1: ", time);
+    let time = this.getNow()
+    console.log("MyServiceStub:printTime ", time);
   }
 
   getNow() {
@@ -12,4 +12,4 @@ export class Service1 {
     let ms = now % 1000;
     return sec.toString() + ":" + ms.toString();
   }
-  }
+}
