@@ -27,18 +27,18 @@ export class AppInitService {
   }
 
   pingServer(): Promise<any> {
-    console.log('AppInitService:pingServer. Enter ', this.gNow());
+    console.log('AppInitService:pingServer. Enter ', AppInitService.getNow());
 
     const promise = this.httpClient
       .get(server)
       .toPromise()
       .then((settings) => {
-        console.log('AppInitService:pingServer Got server response', this.gNow());
+        console.log('AppInitService:pingServer Got server response', AppInitService.getNow());
         AppInitService.isRunning = true;
         return true;
       })
       .catch((err) => {
-        console.log('AppInitService:pingServer No server Response', this.gNow());
+        console.log('AppInitService:pingServer No server Response', AppInitService.getNow());
         AppInitService.isRunning = false;
         err;
       });
@@ -46,29 +46,10 @@ export class AppInitService {
     return promise;
   }
 
- gNow() {
-    let now = Date.now();
-    let sec = (Math.floor(now / 1000)) % 100;
-    let ms = now % 1000;
-    return sec.toString() + ":" + ms.toString();
-  }
   static getNow() {
     let now = Date.now();
     let sec = (Math.floor(now / 1000)) % 100;
     let ms = now % 1000;
     return sec.toString() + ":" + ms.toString();
   }
-
-
-  // Example of using APP_INITIALIZER twice.
-  // initializeApp(): Promise<any> {
-  //  return new Promise<void>((resolve, reject) => {
-  //    console.log(`initializeApp:: inside promise`);
-  //    setTimeout(() => {
-  //      console.log(`initializeApp:: inside setTimeout`);
-  //      // doing something
-  //      resolve();
-  //    }, 3000);
-  //  });
-  // }
 }
