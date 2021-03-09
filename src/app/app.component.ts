@@ -3,7 +3,7 @@ import { MyService } from './services/myservice'
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  template: `<h2> testasync </h2>`
 })
 export class AppComponent {
   title = 'testasync';
