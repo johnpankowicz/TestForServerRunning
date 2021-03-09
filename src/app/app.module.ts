@@ -7,6 +7,10 @@ import { MyServiceStub } from './services/myservice-stub';
 import { AppInitModule } from './services/appinit.module';
 import { AppInitService } from './services/appinit.service';
 
+function IsRunning(){
+  return AppInitService.isWebServerRunning();
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +22,7 @@ import { AppInitService } from './services/appinit.service';
   providers: [
     {
       provide: MyService,
-      useClass: AppInitService.isWebServerRunning() ?  MyService : MyServiceStub
+      useClass: IsRunning() ?  MyService : MyServiceStub
     }
 ],
   bootstrap: [AppComponent]
