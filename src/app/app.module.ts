@@ -6,7 +6,6 @@ import { MyService } from './services/myservice';
 import { MyServiceStub } from './services/myservice-stub';
 import { AppInitModule } from './services/appinit.module';
 import { AppInitService } from './services/appinit.service';
-import { HttpClient } from '@angular/common/http';
 
 
 let running = false;
@@ -23,17 +22,17 @@ function useServer() {
   // console.log('appmodule:useServer Exit. running=' + running, getNow());
   // return running;
 
-  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-  wait(2 * 1000).then(() => console.log('waited for 2 seconds', getNow()));
+  // const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  // wait(2 * 1000).then(() => console.log('waited for 2 seconds', getNow()));
 
   console.log('appmodule:useServer Exit. isrunning=' + isrunning, getNow());
   return isrunning;
 }
 
-function useServer2() {
+// function useServer2() {
 
-  return false;
-}
+//   return false;
+// }
 
 
 ///////////////////////////////////////////////////////////////////
@@ -48,8 +47,8 @@ function useServer2() {
   providers: [
     {
     provide: MyService,
-    useClass: useServer() ?  MyService : MyServiceStub
-    // useClass: AppInitService.isWebServerRunning() ?  MyService : MyServiceStub
+    // useClass: useServer() ?  MyService : MyServiceStub
+    useClass: AppInitService.isWebServerRunning() ?  MyService : MyServiceStub
 
     }
 ],
